@@ -38,6 +38,8 @@ import (
 	clog "v2ray.com/core/common/log"
 
 	"v2ray.com/core/common/platform/filesystem"
+
+	plugin "github.com/unknown0xff/v2ray-plugin/core"
 )
 
 var (
@@ -362,6 +364,10 @@ func printVersion() {
 	fmt.Println("Yet another SIP003 plugin for shadowsocks")
 }
 
+func test() {
+	plugin.startV2RayPlugin("127.0.0.1", 3333, "test.com", "/", true, "websocket", 1)
+}
+
 func main() {
 	flag.Parse()
 
@@ -374,7 +380,9 @@ func main() {
 
 	printCoreVersion()
 
-	server, err := startV2Ray()
+	test()
+
+	/*server, err := startV2Ray()
 	if err != nil {
 		logFatal(err.Error())
 		// Configuration error. Exit with a special value to prevent systemd from restarting.
@@ -390,7 +398,7 @@ func main() {
 		if err != nil {
 			logWarn(err.Error())
 		}
-	}()
+	}()*/
 
 	{
 		osSignals := make(chan os.Signal, 1)
